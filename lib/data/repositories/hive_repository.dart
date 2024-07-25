@@ -5,7 +5,7 @@ import 'package:centsability/data/models/transaction.dart';
 import 'package:centsability/data/models/category.dart';
 import 'package:hive/hive.dart';
 
-class HiveRepository extends Repository {
+class HiveRepository implements Repository {
   final Box<TransactionModel> transactionBox;
   final Box<CategoryModel> categoryBox;
 
