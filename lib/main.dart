@@ -1,6 +1,10 @@
+import 'package:centsability/data/repositories/hive_repository.dart';
+import 'package:centsability/presentation/viewmodels/main_view_model.dart';
+import 'package:centsability/presentation/views/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:path_provider/path_provider.dart' as path_provider;
+import 'package:provider/provider.dart';
 import 'data/models/transaction.dart';
 import 'data/models/budget_category.dart';
 
@@ -12,10 +16,22 @@ void main() async {
   Hive.registerAdapter(TransactionModelAdapter());
   Hive.registerAdapter(CategoryModelAdapter());
 
-  await Hive.openBox<TransactionModel>('transactions');
-  await Hive.openBox<BudgetCategoryModel>('categories');
+  final transactionBox = await Hive.openBox<TransactionModel>('transactions');
+  final categoryBox = await Hive.openBox<BudgetCategoryModel>('categories');
 
-  runApp(MyApp());
+  final repository = HiveRepository(transactionBox, categoryBox);
+
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (_) => MainViewModel(repository),
+          child: MyApp(),
+        ),
+      ],
+      child: MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -26,21 +42,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: MyHomePage(),
-    );
-  }
-}
-
-class MyHomePage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('CentsAbility'),
-      ),
-      body: Center(
-        child: Text('Welcome to CentsAbility!'),
-      ),
+      home: HomePage(),
     );
   }
 }
