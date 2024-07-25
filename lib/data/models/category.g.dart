@@ -1,28 +1,28 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'category.dart';
+part of 'budget_category.dart';
 
 // **************************************************************************
 // TypeAdapterGenerator
 // **************************************************************************
 
-class CategoryModelAdapter extends TypeAdapter<CategoryModel> {
+class CategoryModelAdapter extends TypeAdapter<BudgetCategoryModel> {
   @override
   final int typeId = 1;
 
   @override
-  CategoryModel read(BinaryReader reader) {
+  BudgetCategoryModel read(BinaryReader reader) {
     final numOfFields = reader.readByte();
     final fields = <int, dynamic>{
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
-    return CategoryModel(
+    return BudgetCategoryModel(
       name: fields[0] as String,
     );
   }
 
   @override
-  void write(BinaryWriter writer, CategoryModel obj) {
+  void write(BinaryWriter writer, BudgetCategoryModel obj) {
     writer
       ..writeByte(1)
       ..writeByte(0)

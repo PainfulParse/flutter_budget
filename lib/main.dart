@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:path_provider/path_provider.dart' as path_provider;
 import 'data/models/transaction.dart';
-import 'data/models/category.dart';
+import 'data/models/budget_category.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -13,7 +13,7 @@ void main() async {
   Hive.registerAdapter(CategoryModelAdapter());
 
   await Hive.openBox<TransactionModel>('transactions');
-  await Hive.openBox<CategoryModel>('categories');
+  await Hive.openBox<BudgetCategoryModel>('categories');
 
   runApp(MyApp());
 }
