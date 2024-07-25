@@ -1,4 +1,4 @@
-import 'package:centsability/data/repositories/repository.dart';
+import 'package:centsability/domain/repositories/repository.dart';
 import 'package:centsability/domain/entities/transaction.dart';
 import 'package:centsability/domain/entities/category.dart';
 import 'package:centsability/data/models/transaction.dart';
